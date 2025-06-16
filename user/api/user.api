@@ -1,0 +1,28 @@
+type LoginRequest {
+    UserName string `json:"userName"`
+    Password string `json:"password"`
+}
+type Response {
+    Code int    `json:"code"`
+    Data string `json:"data"`
+    Msg  string `json:"msg"`
+}
+
+type UserInfo {
+    UserName string `json:"userName"`
+    Addr     string `json:"addr"`
+    Id       uint   `json:"id"`
+}
+type UserInfoResponse {
+    Code int      `json:"code"`
+    Data UserInfo `json:"data"`
+    Msg  string   `json:"msg`
+}
+
+service user {
+	@handler login
+	post /api/users/login  returns ()
+
+	@handler userInfo
+    get /api/users/info  returns ()
+}
