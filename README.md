@@ -1,6 +1,6 @@
 # go-zero-second
 
-### 项目文件介绍
+### 项目目录文件介绍
 #### api
 etc下相当于具体的项目配置数据  config下相当于将配置引入项目  
 handler 下相当于有controller和路由配置  
