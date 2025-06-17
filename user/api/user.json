@@ -25,6 +25,24 @@
           ""
         ],
         "summary": "userInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": "",
@@ -121,7 +139,7 @@
       }
     }
   },
-  "x-date": "2025-06-17 15:40:07",
+  "x-date": "2025-06-17 16:25:01",
   "x-description": "This is a goctl generated swagger file.",
   "x-github": "https://github.com/zeromicro/go-zero",
   "x-go-zero-doc": "https://go-zero.dev/",

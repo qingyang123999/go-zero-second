@@ -20,6 +20,10 @@ type UserInfo struct {
 	Id       uint   `json:"id"`
 }
 
+type UserInfoRequest struct {
+	Id int `json:"id"`
+}
+
 type UserInfoResponse struct {
 	Code int      `json:"code"`
 	Data UserInfo `json:"data"`

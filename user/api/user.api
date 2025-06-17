@@ -9,6 +9,10 @@ type LoginResponse {
 	Msg  string `json:"msg"`
 }
 
+type UserInfoRequest {
+	Id int `json:"id"`
+}
+
 type UserInfo {
 	UserName string `json:"userName"`
 	Addr     string `json:"addr"`
@@ -26,6 +30,6 @@ service user {
 	post /api/users/login (LoginRequest) returns (LoginResponse)
 
 	@handler userInfo
-	get /api/users/info returns (UserInfoResponse)
+	get /api/users/info (UserInfoRequest) returns (UserInfoResponse)
 }
 

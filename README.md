@@ -19,7 +19,7 @@ type就是type的放置位置
 ##### 1.先编写user.api文件:               
 ##### 2.验证文件是否正确:       
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api validate --api .\user.api        
-##### 3.生成项目到当前目录下:  
+##### 3.生成项目到当前目录下:  【这个命令不会改变 logic 和 handler 下面的文件】
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api go  --api  .\user.api --dir .  
 ##### 4.根据 api文件(user.api文件)生成 swagger 文档到当前目录下:  
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api swagger --api ./user.api  --dir .  

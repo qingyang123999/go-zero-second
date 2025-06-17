@@ -23,8 +23,16 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 	}
 }
 
-func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
+func (l *UserInfoLogic) UserInfo(req *types.UserInfoRequest) (resp *types.UserInfoResponse, err error) {
 	// todo: add your logic here and delete this line
 
-	return
+	return &types.UserInfoResponse{
+		Code: 0,
+		Data: types.UserInfo{
+			UserName: "zeromicro",
+			Addr:     "zeromicro.svc",
+			Id:       uint(req.Id),
+		},
+		Msg: "成功",
+	}, nil
 }
