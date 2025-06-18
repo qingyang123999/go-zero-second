@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"api/internal/types"
 	"net/http"
 
 	"api/internal/logic"
 	"api/internal/svc"
+	"api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
@@ -19,10 +19,11 @@ func userInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := logic.NewUserInfoLogic(r.Context(), svcCtx)
 		resp, err := l.UserInfo(&req)
-		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
-		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
-		}
+		//if err != nil {
+		//httpx.ErrorCtx(r.Context(), w, err)
+		//} else {
+		//httpx.OkJsonCtx(r.Context(), w, resp)
+		//}
+		response.Response(r, w, resp, err)
 	}
 }

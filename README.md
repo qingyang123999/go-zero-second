@@ -24,6 +24,18 @@ $ C:\Users\A\go\src\go-zero-second\user\api> goctl api go  --api  .\user.api --d
 ##### 4.根据 api文件(user.api文件)生成 swagger 文档到当前目录下:  
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api swagger --api ./user.api  --dir .  
 
+#### 使用goctl template init 指令   
+goctl template init 用于初始化模板    
+然后会在 Templates are generated in C:\Users\A\.goctl\1.8.3, edit on your risk!  生成项目的一系列的模版   
+比如要修改生成的 handler目录下的模板 就在这个目录下找到handler.tpl这个模板进行修改。   
+如： 		
+{{if .HasResp}}resp, {{end}}err := l.{{.Call}}({{if .HasRequest}}&req{{end}})   
+//if err != nil {   
+    //httpx.ErrorCtx(r.Context(), w, err)   
+//} else {   
+    //{{if .HasResp}}httpx.OkJsonCtx(r.Context(), w, resp){{else}}httpx.Ok(w){{end}}   
+//}   
+{{if .HasResp}}response.Response(r, w, resp, err){{else}}response.Response(r, w, nil, err){{end}}   
 
 ### 框架整理
 1.响应如何封装?  
@@ -38,15 +50,27 @@ GitHub地址：https://github.com/zeromicro/go-zero
 简介：go-zero核心框架，包含完整的微服务开发工具链和最佳实践24
 zero-admin电商系统‌
 
-GitHub地址：https://github.com/zjtomoon-cc/zero-admin
-星标数：1.2k+（Fork自feihua/zero-admin）
-简介：基于go-zero实现的电商后台系统，包含前后端分离架构和Docker部署方案7
-awesome-zero生态项目集‌
+looklook实战项目‌
 
-GitCode地址：https://gitcode.com/gh_mirrors/awesome-zero
-简介：整理了基于go-zero的优质项目集合，涵盖中间件集成和业务场景案例2
-go-zero实战案例库‌
+GitHub：https://github.com/Mikaelemmmm/go-zero-looklook
+星标数：4.8k+
+特点：全技术栈微服务最佳实践，包含Kafka/Prometheus等集成1
+‌惺惺社交平台‌
 
-GitHub趋势项目（参考2025年6月数据）：
-部分新兴项目如tensorzero（Rust/Go混合架构）和HumanSystemOptimization（健康类微服务）近期获得较高关注910
-建议优先考察官方项目和awesome-zero生态集，其中zero-admin电商系统具备完整的业务实现参考
+GitHub：https://github.com/cherish-chat/xxim-server
+星标数：2.8k+
+特点：开源IM系统，支持私有化部署1
+simple-admin后台系统‌
+
+GitHub：https://github.com/suyuan32/simple-admin-core
+星标数：1.8k+
+特点：RBAC权限管理系统，集成Ent框架1
+zero-admin电商系统‌
+
+GitHub：https://github.com/feihua/zero-admin
+星标数：1.2k+
+特点：前后端分离的电商后台，含支付和订单模块7
+awesome-zero生态集‌
+
+GitCode：https://gitcode.com/gh_mirrors/awesome-zero
+特点：官方推荐的扩展组件和案例集合
