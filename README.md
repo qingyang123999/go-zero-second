@@ -19,7 +19,7 @@ type就是type的放置位置
 ##### 1.先编写user.api文件:               
 ##### 2.验证文件是否正确:       
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api validate --api .\user.api        
-##### 3.生成项目到当前目录下:  【这个命令不会改变 logic 和 handler 下面的文件】
+##### 3.生成项目到当前目录下:  【这个命令不会改变 logic 和 handler 下面的已经生成的文件，需要删除再重新生成。但是会改变types下面的文件】
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api go  --api  .\user.api --dir .  
 ##### 4.根据 api文件(user.api文件)生成 swagger 文档到当前目录下:  
 $ C:\Users\A\go\src\go-zero-second\user\api> goctl api swagger --api ./user.api  --dir .  
@@ -29,13 +29,35 @@ goctl template init 用于初始化模板
 然后会在 Templates are generated in C:\Users\A\.goctl\1.8.3, edit on your risk!  生成项目的一系列的模版   
 比如要修改生成的 handler目录下的模板 就在这个目录下找到handler.tpl这个模板进行修改。   
 如： 		
-{{if .HasResp}}resp, {{end}}err := l.{{.Call}}({{if .HasRequest}}&req{{end}})   
-//if err != nil {   
-    //httpx.ErrorCtx(r.Context(), w, err)   
-//} else {   
-    //{{if .HasResp}}httpx.OkJsonCtx(r.Context(), w, resp){{else}}httpx.Ok(w){{end}}   
-//}   
-{{if .HasResp}}response.Response(r, w, resp, err){{else}}response.Response(r, w, nil, err){{end}}   
+package {{.PkgName}}
+
+import (
+	"net/http"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"api/common/response"
+	{{.ImportPackages}}
+)
+
+{{if .HasDoc}}{{.Doc}}{{end}}
+func {{.HandlerName}}(svcCtx *svc.ServiceContext) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		{{if .HasRequest}}var req types.{{.RequestType}}
+		if err := httpx.Parse(r, &req); err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
+
+		{{end}}l := {{.LogicName}}.New{{.LogicType}}(r.Context(), svcCtx)
+		{{if .HasResp}}resp, {{end}}err := l.{{.Call}}({{if .HasRequest}}&req{{end}})
+		//if err != nil {
+			//httpx.ErrorCtx(r.Context(), w, err)
+		//} else {
+			//{{if .HasResp}}httpx.OkJsonCtx(r.Context(), w, resp){{else}}httpx.Ok(w){{end}}
+		//}
+		{{if .HasResp}}response.Response(r, w, resp, err){{else}}response.Response(r, w, nil, err){{end}}  
+	}
+} 
 
 ### 框架整理
 1.响应如何封装?  
