@@ -1,0 +1,55 @@
+type LoginRequest {
+	UserName string `json:"userName"`
+	Password string `json:"password"`
+}
+
+type LoginResponse {
+	Code int    `json:"code"`
+	Data string `json:"data"`
+	Msg  string `json:"msg"`
+}
+
+type UserInfoRequest {
+	Id int `json:"id"`
+}
+
+type UserInfo {
+	UserName string `json:"userName"`
+	Addr     string `json:"addr"`
+	Id       uint   `json:"id"`
+}
+
+type UserInfoResponse {
+	Code int      `json:"code"`
+	Data UserInfo `json:"data"`
+	Msg  string   `json:"msg"`
+}
+
+// 有内容
+@server (
+	// 路由前缀
+	// 如果 key 固定为 “prefix:”
+	// 则代表路由前缀声明，value 则为具体的路由前缀值，字符串中没让必须以 / 开头
+	prefix: /api/users
+)
+service user {
+	@handler login
+	post /login (LoginRequest) returns (LoginResponse)
+}
+
+// 有内容
+@server (
+	// jwt 声明
+	// 如果 key 固定为 “jwt:”，则代表开启 jwt 鉴权声明
+	// value 则为配置文件的结构体名称
+	jwt: Auth
+	// 路由前缀
+	// 如果 key 固定为 “prefix:”
+	// 则代表路由前缀声明，value 则为具体的路由前缀值，字符串中没让必须以 / 开头
+	prefix: /api/users
+)
+service user {
+	@handler userInfo
+	get /info (UserInfoRequest) returns (UserInfoResponse)
+}
+
