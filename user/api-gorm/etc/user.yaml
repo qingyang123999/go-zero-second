@@ -1,0 +1,6 @@
+Name: user
+Host: 0.0.0.0
+Port: 8888
+
+Mysql:
+  DataSource: root:Zzhugedaojia12024..@tcp(8.134.181.156:3306)/housekeeping_service?charset=utf8mb4&parseTime=True&loc=Local
