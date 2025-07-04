@@ -12,7 +12,7 @@ etc下相当于具体的项目配置数据  config下相当于将配置引入项
 server 下相当于有controller和路由配置  
 client 下相当于客户端controller  
 logic下就是逻辑文件  
-svc下是上下文文件  
+svc下是上下文文件  依赖注入。比如mysql gorm  redis 等其他服务
 type就是type的放置位置
 
 ### 生成api项目：    
